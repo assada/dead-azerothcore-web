@@ -1,0 +1,113 @@
+.data-table .dt-container { position: relative; }
+.data-table .dt-layout-row { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 16px 20px; }
+.data-table .dt-layout-table { display: block; padding: 0; }
+.data-table .dt-layout-cell { min-width: 0; }
+.table-heading { display: flex; align-items: center; gap: 18px; }
+.table-heading :is(h1, h2) { font-family: Georgia, serif; font-size: 20px; color: #eac789; }
+.table-column { display: none; }
+.data-table .dt-search label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.data-table .dt-search input, .table-column { margin: 0; min-height: 36px; padding: 7px 11px; border: 1px solid #66583f; border-radius: 3px; background-color: #0f100f; color: #eee5d2; font-size: 13px; }
+.data-table .dt-search input { width: 250px; }
+.data-table .dt-search input::placeholder { color: #928b7d; }
+.data-table :is(input, select, a, button, [role="button"], th):focus-visible { outline: 2px solid #cfab61; outline-offset: 2px; --tw-ring-color: transparent; }
+.realm-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.realm-table th { padding: 11px 20px; border-block: 1px solid #514530; background: #27241c; color: #bfb195; font-size: 12px; font-weight: 500; text-align: left; }
+.realm-table td { padding: 14px 20px; border-bottom: 1px solid #353128; vertical-align: middle; }
+.realm-table tbody tr:last-child td { border-bottom: 0; }
+.realm-table tbody tr:hover { background: #29251c; }
+.realm-table .table-rank { width: 55px; padding-right: 0; color: #9e8d6d; font-variant-numeric: tabular-nums; }
+.table-character { width: 35%; }
+.character-summary { display: inline-flex; align-items: center; gap: 12px; }
+.character-summary img { flex-shrink: 0; object-fit: contain; }
+.character-summary strong { display: block; color: var(--class-color); font-size: 14px; font-weight: 600; }
+.character-summary:hover strong { text-decoration: underline; text-underline-offset: 3px; }
+.character-summary small { display: block; margin-top: 3px; color: #a19682; font-size: 11px; }
+.table-number { text-align: right !important; white-space: nowrap; color: #c9bfa9; font-variant-numeric: tabular-nums; }
+.table-number .money { font-size: 13px; }
+.data-table .dt-column-header { display: flex; align-items: center; gap: 7px; }
+.table-number .dt-column-header { justify-content: flex-end; }
+.data-table th.dt-orderable-asc, .data-table th.dt-orderable-desc { cursor: pointer; }
+.data-table .dt-orderable-none .dt-column-order { display: none; }
+.data-table .dt-column-order::after { content: '\2195\FE0E'; color: #958665; font-family: Arial, sans-serif; font-size: 12px; }
+.data-table .dt-ordering-desc .dt-column-order::after { content: '↓'; color: #eac789; }
+.data-table .dt-ordering-asc .dt-column-order::after { content: '↑'; color: #eac789; }
+.data-table th.dt-ordering-desc, .data-table th.dt-ordering-asc { color: #ffe09a; box-shadow: inset 0 -2px #ac8747; }
+.data-table td.table-number.is-selected-column { color: #efe1bf; background: #b5974720; }
+.data-table .dt-info { color: #a79b83; font-size: 12px; }
+.data-table .dt-paging nav { display: flex; align-items: center; gap: 4px; }
+.data-table .dt-paging-button { display: inline-flex; align-items: center; justify-content: center; min-width: 32px; min-height: 32px; padding: 4px 8px; border: 1px solid transparent; border-radius: 3px; color: #baa987; background: transparent; font-size: 12px; cursor: pointer; }
+.data-table .dt-paging-button:hover:not(:disabled) { border-color: #78613b; background: #342b1e; color: #ffe09a; }
+.data-table .dt-paging-button.current { border-color: #a07b42; background: #3b3020; color: #ffe09a; }
+.data-table .dt-paging-button:disabled { opacity: .35; cursor: default; }
+.data-table .dt-empty, .table-empty { padding: 40px 20px; color: #a79b83; font-size: 13px; text-align: center; }
+.data-table .dt-processing { position: absolute; inset: 65px 0 auto; z-index: 2; padding: 13px; background: #27241ce8; color: #dfc38c; font-size: 12px; text-align: center; pointer-events: none; }
+.data-table .dt-processing > div { display: none; }
+.data-table:has(.table-error:not([hidden])) :is(.dt-processing, .dt-layout-table, .dt-info, .dt-paging) { display: none !important; }
+.table-error { padding: 14px 20px; border-bottom: 1px solid #614538; color: #e2b499; font-size: 13px; }
+.table-error button, .table-error a { margin-left: 8px; text-decoration: underline; cursor: pointer; }
+.data-table [hidden] { display: none !important; }
+@media (max-width: 800px) {
+    .data-table .dt-layout-row { padding: 14px; gap: 12px; }
+    .data-table .dt-layout-table { padding: 0; }
+    .realm-table th, .realm-table td { padding-inline: 12px; }
+    .table-character { width: auto; }
+    .realm-table .mobile-secondary { display: none; }
+}
+@media (max-width: 600px) {
+    .data-table .dt-layout-row:first-child { flex-wrap: wrap; }
+    .data-table .dt-layout-row:first-child .dt-layout-cell { width: 100%; }
+    .table-heading { justify-content: space-between; }
+    .table-heading :is(h1, h2) { font-size: 18px; }
+    .table-column { display: block; width: 115px; padding-right: 26px; }
+    .data-table .dt-search input { width: 100%; }
+    .data-table .dt-search input, .table-column { font-size: 16px; }
+    .data-table .dt-processing { top: 113px; }
+    .realm-table .mobile-value, .realm-table .mobile-secondary { display: none; }
+    .realm-table .mobile-value.is-selected-column { display: table-cell; }
+    .realm-table th, .realm-table td { padding: 12px 10px; }
+    .realm-table .table-rank { width: 29px; padding-right: 0; font-size: 11px; }
+    .character-summary { gap: 7px; }
+    .character-summary img { width: 17px; height: 22px; }
+    .character-summary strong { font-size: 13px; }
+    .character-summary small { font-size: 10px; }
+    .table-number .money { flex-wrap: wrap; max-width: 94px; font-size: 11px; }
+    .data-table .dt-layout-row:last-child { flex-wrap: wrap; }
+    .data-table .dt-layout-row:last-child .dt-layout-end { margin-left: auto; }
+}
+
+.data-table { margin-top: 0; scroll-margin-top: 16px; }
+.data-table .dt-layout-full { width: 100%; }
+.data-table .dt-layout-row:has(.table-filters) { padding-top: 0; }
+.table-filters { padding-top: 2px; }
+.character-filters { display: flex; flex-wrap: wrap; align-items: end; gap: 12px; }
+.character-filters label, .character-filters legend { font-size: 11px; color: #a99b80; }
+.character-filters label { display: flex; flex-direction: column; gap: 5px; }
+.character-filters legend { margin-bottom: 5px; }
+.character-filters input, .character-filters select { height: 36px; padding: 6px 10px; border: 1px solid #66583f; border-radius: 3px; background-color: #10110f; color: #ded3bd; font-size: 13px; }
+.character-filters select { min-width: 145px; padding-right: 30px; }
+.character-filters input[name="guild"] { width: 190px; }
+.level-range { display: flex; align-items: center; gap: 7px; color: #a99b80; }
+.level-range input { width: 64px; }
+.table-button, .table-reset { min-height: 36px; padding: 6px 14px; font-size: 12px; cursor: pointer; }
+.table-button { border: 1px solid #80663d; border-radius: 3px; background: #302719; color: #edcf93; }
+.table-button:hover { background: #413322; }
+.table-reset { color: #b5a88d; }
+.table-reset:hover { color: #ffe2a1; text-decoration: underline; }
+.realm-table .table-guild { width: 45%; }
+.guild-link { color: #d7bc82; overflow-wrap: anywhere; }
+.guild-link:hover { color: #ffe1a0; text-decoration: underline; text-underline-offset: 3px; }
+.table-guild .guild-link { font-size: 17px; font-family: Georgia, serif; }
+.table-muted { color: #817767; }
+.online-dot { display: inline-block; width: 6px; height: 6px; margin-left: 3px; border-radius: 50%; background: #84bc6b; vertical-align: middle; }
+@media (max-width: 600px) {
+    .character-filters { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 10px; }
+    .character-filters label { min-width: 0; }
+    .character-filters input, .character-filters select { width: 100%; min-width: 0; font-size: 16px; }
+    .character-filters input[name="guild"] { width: 100%; }
+    .level-range input { width: 58px; }
+    .character-filters fieldset { grid-column: auto; }
+    .table-button { justify-self: end; align-self: end; }
+    .table-reset { justify-self: end; }
+    .realm-table .table-guild { width: auto; }
+    .realm-table td { overflow-wrap: anywhere; }
+}

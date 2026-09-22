@@ -1,0 +1,10 @@
+services:
+  app:
+    networks:
+      - default
+      - game
+
+networks:
+  game:
+    name: ${AC_NETWORK_NAME:?Set AC_NETWORK_NAME to the existing AzerothCore Docker network}
+    external: true

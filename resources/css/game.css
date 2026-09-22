@@ -1,0 +1,17 @@
+.game-window { --game-bg: #171714; color: #eee5d2; background: var(--game-bg); border: 1px solid #817053; border-radius: 5px; box-shadow: 0 4px 22px #0005, inset 0 0 0 3px #2b2922; overflow: hidden; }
+.quality-0 { color: #9d9d9d; }.quality-1 { color: #fff; }.quality-2 { color: #1eff00; }.quality-3 { color: #5b9eff; }.quality-4 { color: #c36aff; }.quality-5 { color: #ff8000; }.quality-6, .quality-7 { color: #e6cc80; }
+.money { display: inline-flex; justify-content: end; gap: 5px; color: #eee5d2; white-space: nowrap; font-variant-numeric: tabular-nums; font-size: 12px; }
+.money > span { display: inline-flex; align-items: center; gap: 3px; }
+.coin { display: inline-block; width: 9px; height: 9px; border-radius: 50%; border: 1px solid #fff6; box-shadow: inset 0 0 0 1px #0004, 0 1px 1px #000; }
+.coin-gold { background: #e4b84b; }.coin-silver { background: #c0c7cc; }.coin-copper { background: #c47b4d; }
+
+.game-button, .game-page { display: inline-flex; justify-content: center; align-items: center; min-height: 38px; padding: 7px 19px; border: 1px solid #a07b42; border-radius: 3px; background: #61221b; color: #ffe5a8; font-size: 14px; font-weight: 600; box-shadow: inset 0 1px #ffffff15; }
+.game-button:hover, .game-page:hover { background: #7b2a20; color: #fff0bf; }
+.game-footer { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 15px 18px; color: #b9ac94; font-size: 12px; }
+.game-footer nav { display: flex; align-items: center; gap: 14px; }
+.game-page { min-height: 32px; padding: 5px 11px; font-size: 12px; }
+.game-page.is-disabled { background: #25231d; border-color: #4a4030; color: #837969; }
+@media (max-width: 640px) {
+    .money { flex-wrap: wrap; gap: 3px; font-size: 11px; }
+    .game-footer { flex-wrap: wrap; padding: 14px; }.game-footer nav { margin-left: auto; }
+}

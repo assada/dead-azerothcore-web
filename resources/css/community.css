@@ -1,0 +1,73 @@
+.site-shell { min-height: 100vh; background: #151410; }
+.site-nav { background: #1b1a16; border-bottom: 1px solid #49402e; color: #b7ab94; }
+.nav-inner { max-width: 1280px; min-height: 68px; margin: auto; padding: 0 24px; display: flex; align-items: center; gap: 28px; }
+.nav-brand { flex-shrink: 0; }
+.nav-brand img { display: block; width: 124px; height: 58px; object-fit: contain; }
+.nav-links { display: flex; align-items: center; gap: 26px; }
+.nav-link { display: flex; align-items: center; min-height: 44px; padding: 8px 0; font-size: 14px; line-height: 1.2; white-space: nowrap; }
+.nav-link:hover { color: #f2dfb9; }
+.nav-link.is-active { color: #f0d59d; font-weight: 600; }
+.nav-account { margin-left: auto; }
+.account-trigger { display: flex; align-items: center; gap: 12px; min-height: 38px; max-width: 200px; padding: 8px 0; color: #c4b89f; font-size: 12px; cursor: pointer; }
+.account-trigger > span { overflow: hidden; text-overflow: ellipsis; }
+.account-trigger svg { width: 12px; height: 12px; flex-shrink: 0; }
+.account-menu { background: #252119; border: 1px solid #675438; padding: 5px; border-radius: 3px; }
+.account-menu a, .account-menu button { display: block; width: 100%; padding: 10px; color: #d7c8aa; text-align: left; font-size: 13px; cursor: pointer; }
+.account-menu a:hover, .account-menu button:hover { background: #393020; }
+.account-role { padding: 7px 10px; color: #9e8b66; font-size: 10px; letter-spacing: .08em; }
+.nav-toggle { display: none; min-width: 44px; min-height: 44px; cursor: pointer; }
+.nav-toggle svg { width: 22px; height: 22px; }
+.site-nav :is(a, button):focus-visible, .page-back:focus-visible { outline: 2px solid #d8b570; outline-offset: 4px; }
+.page-header { max-width: 1280px; margin: auto; padding: 32px 24px 0; }
+.page-heading { display: flex; flex-wrap: wrap; align-items: baseline; gap: 16px; }
+.page-heading h1, .guild-header h1 { font-family: Georgia, serif; font-size: 32px; line-height: 1.2; font-weight: 400; color: #e7c88d; }
+.page-heading > span { color: #948874; font-size: 12px; }
+.community-page { max-width: 1280px; margin: auto; padding: 24px 24px 48px; }
+.my-characters { margin-bottom: 32px; }
+.my-characters :is(h1, h2) { margin-bottom: 12px; color: #d0bd95; font-family: Georgia, serif; font-size: 20px; }
+.my-character-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 18px; }
+.my-character { position: relative; min-width: 0; border: 1px solid color-mix(in srgb, var(--class-color) 48%, #52472e); border-radius: 5px; background: linear-gradient(125deg, color-mix(in srgb, var(--class-color) 13%, #1c1a17), #1c1a17 72%); box-shadow: inset 0 0 0 3px #11120f99, inset 0 0 0 4px color-mix(in srgb, var(--class-color) 15%, transparent), 0 4px 14px #0003; }
+.my-character:hover { border-color: color-mix(in srgb, var(--class-color) 75%, #b59b62); }
+.my-character:has(.character-summary:focus-visible) { outline: 2px solid #e3bf77; outline-offset: 3px; }
+.my-character-identity { padding: 22px 22px 19px; }
+.my-character .character-summary { gap: 14px; }
+.my-character .character-summary::after { content: ''; position: absolute; inset: 0; }
+.my-character .character-summary img { width: 32px; height: 38px; }
+.my-character .character-summary strong { font-size: 18px; }
+.my-character .character-summary small { margin-top: 5px; font-size: 12px; }
+.my-character .guild-link { position: relative; z-index: 1; display: table; margin: 8px 0 0 46px; font-size: 12px; }
+.my-character-stats { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px; margin: 0 4px 4px; padding: 13px 18px 15px; border-top: 1px solid color-mix(in srgb, var(--class-color) 18%, #30291e); background: #11110e55; }
+.my-character-stats dt { margin-bottom: 5px; color: #9d8f76; font-size: 10px; }
+.my-character-stats dd { color: #d7c9ac; font-size: 12px; font-variant-numeric: tabular-nums; }
+.my-character-stats .money { font-size: 12px; }
+.page-back { color: #b5a88d; font-size: 13px; }
+.page-back:hover { color: #ffe2a1; }
+.guild-header { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 24px 0 30px; }
+.guild-header h1 { font-size: 38px; overflow-wrap: anywhere; }
+.guild-leader { display: flex; align-items: center; gap: 14px; margin-top: 18px; }
+.guild-leader > span { color: #968970; font-size: 11px; }
+.guild-counts { display: flex; flex-shrink: 0; gap: 32px; text-align: right; }
+.guild-counts dt { color: #a6987e; font-size: 12px; }
+.guild-counts dd { margin-top: 5px; color: #e9c787; font-size: 28px; font-variant-numeric: tabular-nums; }
+.character-identity h1 { font-family: Georgia, serif; font-weight: 400; }
+@media (max-width: 900px) {
+    .nav-inner { flex-wrap: wrap; gap: 0 18px; min-height: 64px; }
+    .nav-brand img { width: 106px; height: 54px; }
+    .nav-account { margin-left: auto; }
+    .account-trigger { max-width: 145px; }
+    .nav-toggle { display: flex; align-items: center; justify-content: center; }
+    .nav-links { display: none; width: 100%; order: 4; padding: 6px 0 12px; gap: 6px; flex-wrap: wrap; }
+    .site-nav.is-open .nav-links { display: flex; }
+    .nav-link { flex: 1 0 42%; padding: 12px 0; }
+}
+@media (max-width: 600px) {
+    .nav-inner { padding-inline: 14px; gap: 0 10px; }
+    .account-trigger { max-width: 110px; }
+    .page-header { padding: 24px 14px 0; }
+    .page-heading h1 { font-size: 28px; }
+    .community-page { padding: 20px 14px 36px; }
+    .guild-header { align-items: start; flex-wrap: wrap; gap: 20px; }
+    .guild-header h1 { font-size: 32px; }
+    .guild-counts { text-align: left; gap: 28px; }
+    .guild-counts dd { font-size: 24px; }
+}

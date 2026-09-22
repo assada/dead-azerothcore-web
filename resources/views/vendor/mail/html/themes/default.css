@@ -1,0 +1,35 @@
+body { margin: 0; padding: 0; width: 100% !important; background-color: #151410; color: #3e3425; -webkit-text-size-adjust: none; }
+body, td, p, a, li { font-family: Arial, Helvetica, sans-serif; }
+table { border-spacing: 0; }
+img { max-width: 100%; border: 0; }
+a { color: #733023; }
+p, ul, ol, blockquote { margin: 0 0 18px; font-size: 15px; line-height: 1.7; }
+h1, h2, h3 { color: #382a19; font-family: Georgia, 'Times New Roman', serif; font-weight: normal; text-align: left; }
+h1 { margin: 0 0 24px; font-size: 32px; line-height: 1.2; }
+h2 { margin: 0 0 20px; font-size: 24px; }
+h3 { margin: 0 0 16px; font-size: 19px; }
+.wrapper { width: 100%; margin: 0; padding: 0; background-color: #151410; }
+.content { width: 100%; margin: 0; padding: 0; }
+.header { padding: 34px 0 26px; text-align: center; }
+.header a { display: inline-block; color: #e8d7b2; text-decoration: none; }
+.logo { display: block; width: 260px; height: 122px; }
+.body { width: 100%; padding: 0 20px; }
+.inner-body { width: 570px; margin: 0 auto; background-color: #e8d7b2; border: 4px double #927348; box-shadow: 0 8px 32px #00000040; }
+.content-cell { padding: 42px 44px 34px; }
+.action { width: 100%; margin: 26px 0 30px; padding: 0; }
+.button { display: inline-block; color: #ffe5a8; background-color: #61221b; border: 1px solid #96703a; border-radius: 2px; padding: 12px 28px; font-size: 15px; font-weight: bold; line-height: 1.4; text-decoration: none; text-align: center; mso-padding-alt: 0; text-underline-color: #61221b; }
+.button-success { background-color: #30472b; }
+.button-error { background-color: #61221b; }
+.subcopy { margin-top: 28px; padding-top: 24px; border-top: 1px solid #bca47a; }
+.subcopy p { margin-bottom: 8px; color: #6b583c; font-size: 11px; line-height: 1.65; }
+.subcopy a { color: #725330; text-decoration: underline; }
+.break-all { word-break: break-all; overflow-wrap: anywhere; }
+.footer { width: 570px; margin: 0 auto; text-align: center; }
+.footer .content-cell { padding: 26px 20px 34px; }
+.footer p { margin: 0; color: #938977; font-size: 12px; text-align: center; }
+.footer a { color: #c3aa7b; text-decoration: none; }
+.table table { width: 100%; margin: 24px 0; }
+.table th, .table td { padding: 10px 0; text-align: left; border-bottom: 1px solid #bca47a; }
+.panel { margin: 24px 0; border-left: 3px solid #8a6836; }
+.panel-content { padding: 16px; background-color: #d9c49b; }
+.panel-content p:last-child { margin-bottom: 0; }

@@ -1,0 +1,42 @@
+@import "tailwindcss";
+@import "flowbite/src/themes/default";
+@import "./game.css";
+@import "./auction.css";
+@import "./character.css";
+@import "./data-table.css";
+@import "./community.css";
+@import "./account.css";
+@plugin "@tailwindcss/forms";
+@plugin "flowbite/plugin";
+
+/* Tell Tailwind v4 where to look for class usage */
+@source "../views/**/*.blade.php";
+@source "../js/**/*.js";
+@source "../../storage/framework/views/*.php";
+@source "../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php";
+@source "../../node_modules/flowbite";
+@source "../../resources/views/**/*.blade.php";
+@source "../../resources/**/*.php";
+
+@theme {
+    --color-gray-900: #151410;
+    --color-gray-800: #24221c;
+    --color-gray-700: #3a3429;
+    --color-gray-600: #625b4c;
+    --color-gray-500: #938977;
+    --color-gray-400: #afa48f;
+    --color-gray-300: #cdc2ad;
+    --color-gray-200: #e3dac8;
+    --color-gray-100: #f0eadf;
+    --color-indigo-400: #d9b875;
+    --color-indigo-500: #c39a54;
+    --color-indigo-600: #a78043;
+    --color-indigo-700: #806035;
+}
+
+@layer base {
+    :root { color-scheme: light dark; }        /* коректні скроллбари/оверлеї */
+    html { @apply bg-gray-900; }               /* фон для rubber-band */
+    body { @apply bg-gray-900 text-gray-100; } /* основний фон і текст */
+    .no-bounce { overscroll-behavior: contain; }
+  }

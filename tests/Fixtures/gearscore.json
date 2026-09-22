@@ -1,0 +1,201 @@
+[
+  {
+    "name": "empty",
+    "equipment": [],
+    "class": 1,
+    "score": 0,
+    "level": 0
+  },
+  {
+    "name": "shirt only",
+    "equipment": [
+      {
+        "slot": 3,
+        "quality": 1,
+        "itemLevel": 1,
+        "classId": 4,
+        "subclassId": 4,
+        "enchantments": "0 0 0"
+      }
+    ],
+    "class": 1,
+    "score": 0,
+    "level": 0
+  },
+  {
+    "name": "two handed weapon",
+    "equipment": [
+      {
+        "slot": 15,
+        "quality": 4,
+        "itemLevel": 277,
+        "classId": 2,
+        "subclassId": 1,
+        "enchantments": "0 0 0"
+      }
+    ],
+    "class": 1,
+    "score": 1040,
+    "level": 277
+  },
+  {
+    "name": "dual two handed",
+    "equipment": [
+      {
+        "slot": 15,
+        "quality": 4,
+        "itemLevel": 277,
+        "classId": 2,
+        "subclassId": 1,
+        "enchantments": "0 0 0"
+      },
+      {
+        "slot": 16,
+        "quality": 4,
+        "itemLevel": 264,
+        "classId": 2,
+        "subclassId": 8,
+        "enchantments": "0 0 0"
+      }
+    ],
+    "class": 1,
+    "score": 762,
+    "level": 270
+  },
+  {
+    "name": "hunter weapon weights",
+    "equipment": [
+      {
+        "slot": 15,
+        "quality": 4,
+        "itemLevel": 277,
+        "classId": 2,
+        "subclassId": 6,
+        "enchantments": "0 0 0"
+      },
+      {
+        "slot": 17,
+        "quality": 4,
+        "itemLevel": 284,
+        "classId": 2,
+        "subclassId": 2,
+        "enchantments": "0 0 0"
+      }
+    ],
+    "class": 3,
+    "score": 1251,
+    "level": 279
+  },
+  {
+    "name": "thrown ignores enchant penalty",
+    "equipment": [
+      {
+        "slot": 17,
+        "quality": 4,
+        "itemLevel": 264,
+        "classId": 2,
+        "subclassId": 16,
+        "enchantments": "0 0 0"
+      }
+    ],
+    "class": 4,
+    "score": 156,
+    "level": 264
+  },
+  {
+    "name": "unenchanted head",
+    "equipment": [
+      {
+        "slot": 0,
+        "quality": 4,
+        "itemLevel": 277,
+        "classId": 4,
+        "subclassId": 4,
+        "enchantments": "0 0 0"
+      }
+    ],
+    "class": 1,
+    "score": 520,
+    "level": 277
+  },
+  {
+    "name": "enchanted head",
+    "equipment": [
+      {
+        "slot": 0,
+        "quality": 4,
+        "itemLevel": 277,
+        "classId": 4,
+        "subclassId": 4,
+        "enchantments": "3817 0 0"
+      }
+    ],
+    "class": 1,
+    "score": 531,
+    "level": 277
+  },
+  {
+    "name": "heirloom",
+    "equipment": [
+      {
+        "slot": 2,
+        "quality": 7,
+        "itemLevel": 1,
+        "classId": 4,
+        "subclassId": 4,
+        "enchantments": "0 0 0"
+      }
+    ],
+    "class": 1,
+    "score": 178,
+    "level": 1
+  },
+  {
+    "name": "legendary",
+    "equipment": [
+      {
+        "slot": 15,
+        "quality": 5,
+        "itemLevel": 284,
+        "classId": 2,
+        "subclassId": 1,
+        "enchantments": "0 0 0"
+      }
+    ],
+    "class": 1,
+    "score": 1404,
+    "level": 284
+  },
+  {
+    "name": "low level and common",
+    "equipment": [
+      {
+        "slot": 0,
+        "quality": 1,
+        "itemLevel": 10,
+        "classId": 4,
+        "subclassId": 4,
+        "enchantments": "0 0 0"
+      },
+      {
+        "slot": 4,
+        "quality": 2,
+        "itemLevel": 115,
+        "classId": 4,
+        "subclassId": 4,
+        "enchantments": "0 0 0"
+      },
+      {
+        "slot": 1,
+        "quality": 3,
+        "itemLevel": 100,
+        "classId": 4,
+        "subclassId": 4,
+        "enchantments": "0 0 0"
+      }
+    ],
+    "class": 1,
+    "score": 154,
+    "level": 75
+  }
+]
