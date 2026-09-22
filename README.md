@@ -1,5 +1,7 @@
 # dead-azerothcore-web
 
+https://github.com/user-attachments/assets/0f35ecfc-3f42-4eb2-bd0f-d6bbd7f2723d
+
 Account management, character armory, guilds, leaderboards, and auctions for AzerothCore WotLK 3.3.5a.
 
 Supports one realm per installation. Connects to your AzerothCore auth, characters, and world databases.
