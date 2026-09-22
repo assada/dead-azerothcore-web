@@ -1,6 +1,6 @@
 # Character pages
 
-Character pages run in Laravel. They read AzerothCore's character and world databases and use the existing browser model viewer. No armory backend or iframe is needed.
+Character pages read AzerothCore's character and world databases. The browser viewer renders the character and equipment.
 
 The page includes equipment tooltips, saved character stats, both talent groups and their glyphs, learned mounts, achievements, reputation, skills and arena teams. It uses AzerothCore's `talentGroupsCount`, `activeTalentGroup` and spell `specMask` columns.
 
@@ -8,11 +8,15 @@ The page includes equipment tooltips, saved character stats, both talent groups 
 
 Character data is queried on each request. Stats come from `character_stats`, so they reflect the values saved by the game server. Static client metadata is stored in `resources/data/game` and cached by file modification time. The auction's item icons use the same data loader.
 
-GearScore and average item level are in `app/Support/GearScore.php`. They preserve the previous server formulas, including hunter weapon weights, two-handed weapons, heirlooms and enchantment penalties. Mount counts use known mount spell IDs. Reputation includes the race/class base value and follows the client faction hierarchy.
+GearScore and average item level are in `app/Support/GearScore.php`. The formulas account for hunter weapon weights, two-handed weapons, heirlooms and enchantment penalties. Mount counts use known mount spell IDs. Reputation includes the race/class base value and follows the client faction hierarchy.
 
 ## Model assets
 
-Place the model data directories here:
+The standard pack is `data.tar.gz` in [release v1.0.0](https://github.com/assada/dead-azerothcore-web/releases/tag/v1.0.0). The [installation guide](../README.md#install) includes commands to download it and extract it into the application storage volume.
+
+The archive has asset directories at its root. Extract it without `--strip-components`. The download is about 2 GB, with additional disk space required for the extracted files.
+
+The resulting container paths are:
 
 ```
 storage/app/modelviewer/9.2.0/
@@ -22,9 +26,15 @@ storage/app/modelviewer/9.2.0/
   bone/
 ```
 
-Nginx serves them at `/modelviewer/9.2.0/`. The storage volume keeps these files outside the application image. For an existing asset pack, copy these directories into the application container with `docker compose cp /path/to/modelviewer/9.2.0/. app:/var/www/html/storage/app/modelviewer/9.2.0/`. The repository does not provide an asset download or extraction workflow yet. Do not copy its `data.tar.gz` archive into the serving directory.
+Nginx serves these files at `/modelviewer/9.2.0/`. The storage volume preserves them across application rebuilds. Keep the archive outside this directory.
 
-`public/vendor/modelviewer/viewer.min.js` is the server's existing customized viewer from [azerothcore-armory](https://github.com/r-o-b-o-t-o/azerothcore-armory). Its source repository's license is included beside it. The Laravel adapter supplies jQuery and the viewer's debug hook. The transparent canvas shares the page's courtyard background.
+For an existing extracted pack, use the same layout and copy it into the running container:
+
+```sh
+docker compose cp /path/to/modelviewer/9.2.0/. app:/var/www/html/storage/app/modelviewer/9.2.0/
+```
+
+`public/vendor/modelviewer/viewer.min.js` provides the browser renderer. Its license is included beside it. The Laravel adapter supplies jQuery and the viewer's debug hook. The transparent canvas shares the page's courtyard background.
 
 ### Viewer options
 
@@ -50,17 +60,13 @@ Both effects use the viewer's render loop. Snow pauses outside the viewport and 
 
 ## Rebuilding metadata
 
-The generated JSON is included with the application. To rebuild it, run:
+Game metadata lives in `resources/data/game`.
 
-```sh
-docker compose run --rm -v /path/to/client-data:/client-data:ro app php -d memory_limit=512M artisan wow:import-data /client-data
-```
-
-The importer expects the original 3.3.5 client CSV files for spells, spell icons, items, item display information, enchantments, talents, talent tabs, glyphs, achievements and achievement categories. It also uses `Skills.csv`, `Areas.csv`, WotLK `Faction.dbc`, the 9.2.0 item/appearance and mount CSV files, and the viewer's `meta/charactercustomization2` directory. Filenames are listed in `ImportGameData.php`.
+See [Custom server data](custom-server-data.md) for source files, CSV exports, the Docker import command, and custom item limitations. The guide mounts the output directory so that generated files survive container removal.
 
 ## Deployment and checks
 
-Keep the existing database connections and authentication configuration. `DB_WORLD_DATABASE` selects the world database; `WOW_TOOLTIP_URL` selects the AoWoW tooltip host. Copy model assets before starting the new image.
+Keep the existing database connections and authentication configuration. `DB_WORLD_DATABASE` selects the world database. `WOW_TOOLTIP_URL` selects the AoWoW tooltip host. Install model assets before opening a character page.
 
 ```sh
 docker compose build app
@@ -68,7 +74,7 @@ docker compose up -d --no-deps app
 docker compose exec app php artisan optimize
 ```
 
-Verify login, a character with equipment, model rotation/zoom, talent groups, mount switching, achievement filters and a narrow mobile viewport before stopping the old armory service.
+After deployment, check login, equipped characters, model rotation/zoom, talent groups, mount switching, achievement filters and mobile layout.
 
 Run the feature and formula tests with:
 

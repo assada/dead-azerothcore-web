@@ -11,6 +11,7 @@ public/branding
 storage
 bootstrap/cache
 data
+resources/data/source
 logs
 .artifacts
 .claude

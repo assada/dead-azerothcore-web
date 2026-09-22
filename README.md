@@ -2,15 +2,15 @@
 
 Account management, character armory, guilds, leaderboards, and auctions for AzerothCore WotLK 3.3.5a.
 
-This repository supports one realm per installation. It connects to existing AzerothCore databases and an optional SOAP endpoint. Docker builds PHP 8.4, Nginx, Composer dependencies, and frontend assets.
+Supports one realm per installation. Connects to your AzerothCore auth, characters, and world databases.
 
 ## Requirements
 
 - Docker Engine with Docker Compose v2.
-- An existing AzerothCore WotLK installation with SRP6 account credentials.
+- Git and curl.
+- An AzerothCore WotLK 3.3.5a server.
 - Access to its auth, characters, and world databases.
 - An SMTP account for verification, password resets, and email changes.
-- Model assets for the 3D viewer. The repository does not include the model asset pack. See [character assets](docs/character-page.md#model-assets).
 
 The characters and world databases must share a MySQL server. The application joins tables across these databases. The auth database can use a separate server.
 
@@ -19,7 +19,7 @@ The characters and world databases must share a MySQL server. The application jo
 1. Clone the repository and create the local configuration:
 
    ```sh
-   git clone git@github.com:assada/dead-azerothcore-web.git
+   git clone https://github.com/assada/dead-azerothcore-web.git
    cd dead-azerothcore-web
    cp .env.example .env
    ```
@@ -53,7 +53,20 @@ The characters and world databases must share a MySQL server. The application jo
 
    The default address is `http://localhost:8080`. `HTTP_BIND` and `HTTP_PORT` control the published address. Redis has no published port.
 
-6. Add the 3D model assets using the [asset instructions](docs/character-page.md#model-assets).
+6. Download and install the 3D models:
+
+   ```sh
+   mkdir -p data/modelviewer
+   curl -fL -o data/modelviewer/data.tar.gz \
+     https://github.com/assada/dead-azerothcore-web/releases/download/v1.0.0/data.tar.gz
+   docker compose exec -T app tar -xzf - \
+     -C /var/www/html/storage/app/modelviewer/9.2.0 \
+     < data/modelviewer/data.tar.gz
+   ```
+
+   The download is about 2 GB. The models persist in the storage volume across application updates.
+
+7. Open `http://localhost:8080`, or your configured `APP_URL` through its reverse proxy. Existing game accounts can sign in.
 
 The `/up` endpoint reports application health. It does not confirm connectivity to the game databases, SMTP, or SOAP.
 
@@ -111,7 +124,9 @@ The application trusts forwarded client IP and protocol headers only from the co
 
 For local branding files, put images in `public/branding/` and set paths such as `SITE_LOGO=/branding/logo.png`. Compose mounts this directory. Git and Docker builds exclude its contents. An empty logo uses the website name.
 
-Registration continues to use email as the game login. The default action limits remain three hours for unstuck, one rolling year for rename, and one calendar quarter for appearance changes. The default community pages require login. The homepage keeps its existing static news and status display.
+Players register with their email address as their game login. Community pages require login by default. [Account configuration](docs/account.md) describes the character actions and their limits.
+
+For custom items, spells, areas, or models, see [Custom server data](docs/custom-server-data.md).
 
 Sessions use the auth database. Cache and action locks use Redis. Notifications run synchronously, so this installation does not need a queue worker or a jobs table. Set `MAIL_MAILER=log` only for local development.
 
@@ -136,7 +151,7 @@ Review migration changes before reverting an application version. Do not remove 
 
 ## Development
 
-Run Composer and PHP in the PHP 8.4 container. The host PHP version is not part of this workflow.
+Run Composer and PHP in the PHP 8.4 container:
 
 ```sh
 docker build --target composer_deps -t dead-azerothcore-web-php .
@@ -152,5 +167,3 @@ Run frontend commands in Node 20:
 docker run --rm -v "$PWD:/app" -w /app node:20-alpine npm ci
 docker run --rm -v "$PWD:/app" -w /app node:20-alpine npm run build
 ```
-
-Runtime data, dependencies, local credentials, and build outputs stay outside Git. The repository retains third-party license notices with the bundled viewer. Model asset distribution and the project release license remain separate work before a public release.
