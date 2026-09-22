@@ -1,10 +1,21 @@
 # dead-azerothcore-web
 
+![AzerothCore character armory with a 3D model, equipment, and character stats](docs/screenshot.png)
+
 https://github.com/user-attachments/assets/0f35ecfc-3f42-4eb2-bd0f-d6bbd7f2723d
 
-Account management, character armory, guilds, leaderboards, and auctions for AzerothCore WotLK 3.3.5a.
+A self-hosted website and 3D character armory for AzerothCore servers running World of Warcraft: Wrath of the Lich King (3.3.5a).
+
+- Character profiles with equipment, talents, mounts, achievements, reputation, and skills.
+- Account registration, email verification, password resets, and session management.
+- Guild rosters, leaderboards, and auction house browsing.
+- Configurable branding and character actions: unstuck, rename, and appearance changes.
 
 Supports one realm per installation. Connects to your AzerothCore auth, characters, and world databases.
+
+Built with Laravel. Deploy with Docker Compose.
+
+[Installation](#install) · [Configuration](#configuration) · [Custom server data](docs/custom-server-data.md) · [Live example](https://wow.dead.guru)
 
 ## Requirements
 
