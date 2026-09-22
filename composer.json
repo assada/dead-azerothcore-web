@@ -3,6 +3,7 @@
     "name": "assada/dead-azerothcore-web",
     "type": "project",
     "description": "Account management and armory for AzerothCore WotLK servers.",
+    "license": "AGPL-3.0-only",
     "keywords": [
         "azerothcore",
         "wotlk",

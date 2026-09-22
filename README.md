@@ -167,3 +167,13 @@ Run frontend commands in Node 20:
 docker run --rm -v "$PWD:/app" -w /app node:20-alpine npm ci
 docker run --rm -v "$PWD:/app" -w /app node:20-alpine npm run build
 ```
+
+## License
+
+Copyright (C) 2026 assada.
+
+Original project code and documentation are licensed under the [GNU Affero General Public License, version 3 only](LICENSE) (`AGPL-3.0-only`). Commercial use is permitted.
+
+If you modify the application and run it as a website, you must prominently offer its users free access to the corresponding source code. This includes your changes to the deployed version. See section 13 of the license.
+
+Third-party components retain their own licenses, including the [model viewer](public/vendor/modelviewer/LICENSE). This license does not grant rights to World of Warcraft data or assets.
