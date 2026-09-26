@@ -11,6 +11,13 @@ use Illuminate\Validation\ValidationException;
 
 class LoginRequest extends FormRequest
 {
+    protected function prepareForValidation(): void
+    {
+        if (is_string($this->input('username'))) {
+            $this->merge(['username' => trim($this->input('username'))]);
+        }
+    }
+
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -27,7 +34,7 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'username' => ['required', 'string'],
+            'username' => ['required', 'string', 'max:17'],
             'password' => ['required', 'string'],
         ];
     }

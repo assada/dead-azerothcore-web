@@ -137,7 +137,7 @@ The application trusts forwarded client IP and protocol headers only from the co
 
 For local branding files, put images in `public/branding/` and set paths such as `SITE_LOGO=/branding/logo.png`. Compose mounts this directory. Git and Docker builds exclude its contents. An empty logo uses the website name.
 
-Players register with their email address as their game login. Community pages require login by default. [Account configuration](docs/account.md) describes the character actions and their limits.
+Players choose a username for the website and game. Email is used for verification and password recovery. Community pages require login by default. [Account configuration](docs/account.md) describes the character actions and their limits.
 
 For custom items, spells, areas, or models, see [Custom server data](docs/custom-server-data.md).
 

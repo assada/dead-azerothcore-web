@@ -2,10 +2,15 @@
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
-        <!-- Email Address -->
         <div>
+            <x-input-label for="username" :value="__('Username')" />
+            <x-text-input id="username" class="block mt-1 w-full" type="text" name="username" :value="old('username')" required autofocus maxlength="17" pattern="[A-Za-z0-9]+" title="Up to 17 letters or digits" autocomplete="username" autocapitalize="none" spellcheck="false" />
+            <x-input-error :messages="$errors->get('username')" class="mt-2" />
+        </div>
+
+        <div class="mt-4">
             <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus maxlength="32" autocomplete="username" />
+            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required maxlength="255" autocomplete="email" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 

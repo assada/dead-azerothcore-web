@@ -23,7 +23,7 @@ class ConfirmEmailChange extends Notification
 
         return (new MailMessage)->subject('Confirm your new '.config('app.name').' email')
             ->greeting('Confirm your new email')
-            ->line('Confirm this email to use it as your login on the '.config('app.name').' website and in the game.')
+            ->line('Confirm this email for account security and password recovery.')
             ->action('Confirm email', $url)
             ->line('This link expires in one hour.')
             ->line('If you did not request this change, ignore this email.');

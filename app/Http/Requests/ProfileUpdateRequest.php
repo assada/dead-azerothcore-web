@@ -20,7 +20,7 @@ class ProfileUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => ['required', 'string', 'email', 'max:32', Rule::unique(Account::class, 'email')->ignore($this->user()->id), Rule::unique(Account::class, 'username')->ignore($this->user()->id)],
+            'email' => ['required', 'string', 'email', 'max:255', Rule::unique(Account::class, 'email')->ignore($this->user()->id)],
             'current_password' => ['required', 'string', new \App\Rules\CurrentAccountPassword],
         ];
     }

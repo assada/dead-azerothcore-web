@@ -2,7 +2,7 @@
     <x-slot name="header"><x-page-heading title="Confirm email" /></x-slot>
     <div class="account-page">
         <section class="account-section">
-            <h2>New login email</h2>
+            <h2>New email</h2>
             <form method="post" action="{{ request()->fullUrl() }}" class="account-form">
                 @csrf
                 <p>{{ strtolower($email) }}</p>

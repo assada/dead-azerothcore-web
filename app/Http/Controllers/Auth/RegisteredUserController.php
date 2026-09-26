@@ -32,23 +32,29 @@ class RegisteredUserController extends Controller
     {
         abort_unless(config('wow.registration_enabled'), 404);
 
-        $request->merge(['email' => strtoupper(trim((string) $request->input('email')))]);
+        foreach (['username', 'email'] as $field) {
+            if (is_string($request->input($field))) {
+                $request->merge([$field => strtoupper(trim($request->input($field)))]);
+            }
+        }
         $request->validate([
-            'email' => ['required', 'string', 'email', 'max:32', 'unique:acore_auth.account,email', 'unique:acore_auth.account,username'],
+            'username' => ['required', 'string', 'alpha_num:ascii', 'max:17', 'unique:acore_auth.account,username'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:acore_auth.account,email'],
             'password' => ['required', 'string', 'confirmed', Rules\Password::defaults(), 'max:16'],
         ]);
 
-        $emailValue = strtoupper($request->string('email'));
+        $username = (string) $request->string('username');
+        $email = (string) $request->string('email');
 
         $salt = random_bytes(32);
-        $verifier = \App\Support\Srp6::computeVerifier($emailValue, (string) $request->string('password'), $salt);
+        $verifier = \App\Support\Srp6::computeVerifier($username, (string) $request->string('password'), $salt);
 
         $account = Account::create([
-            'username' => $emailValue,
+            'username' => $username,
             'salt' => $salt,
             'verifier' => $verifier,
-            'email' => $emailValue,
-            'reg_mail' => $emailValue,
+            'email' => $email,
+            'reg_mail' => $email,
             'joindate' => now(),
             'last_ip' => $request->ip(),
             'last_attempt_ip' => $request->ip(),

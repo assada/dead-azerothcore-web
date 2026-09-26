@@ -47,13 +47,19 @@ test('password can be reset with valid token', function () {
         $response = $this->post('/reset-password', [
             'token' => $notification->token,
             'email' => $user->email,
-            'password' => 'password',
-            'password_confirmation' => 'password',
+            'password' => 'new-password',
+            'password_confirmation' => 'new-password',
         ]);
 
         $response
             ->assertSessionHasNoErrors()
             ->assertRedirect(route('login'));
+
+        expect($user->fresh()->username)->toBe($user->username)
+            ->and(auth()->getProvider()->validateCredentials($user->fresh(), ['password' => 'password']))->toBeFalse();
+        $this->post('/login', ['username' => strtolower($user->username), 'password' => 'new-password'])
+            ->assertSessionHasNoErrors()->assertRedirect('/dashboard');
+        $this->assertAuthenticatedAs($user);
 
         return true;
     });

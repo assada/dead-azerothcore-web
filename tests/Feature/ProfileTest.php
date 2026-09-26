@@ -16,10 +16,15 @@ it('shows account settings and only the current accounts sessions', function () 
     $this->actingAs($account)->get('/profile')->assertOk()->assertSee('192.0.2.1')->assertDontSee('192.0.2.99');
 });
 
-it('changes the shared login only after confirming the new email and current password', function () {
+it('changes the recovery email after confirmation without changing game credentials', function () {
     Notification::fake();
     $account = Account::factory()->create();
     $username = $account->username;
+    $salt = $account->salt;
+    $verifier = $account->verifier;
+    DB::connection('acore_auth')->table('password_reset_tokens')->insert([
+        'email' => $account->email, 'token' => 'old-token', 'created_at' => now(),
+    ]);
     $this->actingAs($account)->from('/profile')->patch('/profile', [
         'email' => 'New@example.com', 'current_password' => 'password',
     ])->assertSessionHasNoErrors()->assertRedirect('/profile');
@@ -32,14 +37,16 @@ it('changes the shared login only after confirming the new email and current pas
     expect($account->fresh()->username)->toBe($username);
     $this->post($url, ['current_password' => 'password'])->assertRedirect('/profile');
     $account->refresh();
-    expect($account->username)->toBe('NEW@EXAMPLE.COM')->and($account->email)->toBe('NEW@EXAMPLE.COM')
+    expect($account->username)->toBe($username)->and($account->email)->toBe('NEW@EXAMPLE.COM')
+        ->and($account->salt)->toBe($salt)->and($account->verifier)->toBe($verifier)
         ->and($account->hasVerifiedEmail())->toBeTrue()
         ->and(auth()->getProvider()->validateCredentials($account, ['password' => 'password']))->toBeTrue()
         ->and($account->operations()->where('action', AccountAction::Email)->count())->toBe(1);
+    expect(DB::connection('acore_auth')->table('password_reset_tokens')->count())->toBe(0);
     $this->post($url, ['current_password' => 'password'])->assertForbidden();
 });
 
-it('requires the current password and a unique login email', function () {
+it('requires the current password and a unique recovery email', function () {
     $account = Account::factory()->create();
     $other = Account::factory()->create();
     $this->actingAs($account)->patch('/profile', ['email' => $other->email, 'current_password' => 'password'])
@@ -47,6 +54,30 @@ it('requires the current password and a unique login email', function () {
     $this->patch('/profile', ['email' => 'new@example.com', 'current_password' => 'wrong'])
         ->assertSessionHasErrorsIn('updateProfile', 'current_password');
     expect($account->fresh()->profile)->toBeNull();
+});
+
+it('does not send a confirmation when the email has not changed', function () {
+    Notification::fake();
+    $account = Account::factory()->create();
+    $this->actingAs($account)->from('/profile')->patch('/profile', [
+        'email' => strtolower($account->email), 'current_password' => 'password',
+    ])->assertSessionHasNoErrors()->assertRedirect('/profile');
+    Notification::assertNothingSent();
+    expect($account->fresh()->profile)->toBeNull();
+});
+
+it('accepts a recovery email longer than a game username', function () {
+    Notification::fake();
+    $account = Account::factory()->create();
+    $email = 'a.long.recovery.email.address@example.com';
+    $this->actingAs($account)->patch('/profile', ['email' => $email, 'current_password' => 'password'])
+        ->assertSessionHasNoErrors();
+    $account->refresh();
+    $url = URL::temporarySignedRoute('profile.email.confirm', now()->addHour(), [
+        'id' => $account->id, 'hash' => hash('sha256', strtoupper($email)),
+    ]);
+    $this->post($url, ['current_password' => 'password'])->assertSessionHasNoErrors()->assertRedirect('/profile');
+    expect($account->fresh()->email)->toBe(strtoupper($email));
 });
 
 it('deactivates without deleting characters and allows only administrator restoration', function () {

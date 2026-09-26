@@ -2,14 +2,15 @@
     <h2 id="account-information-title">Account</h2>
     <div class="account-section-content">
         <dl class="account-facts">
+            <div><dt>Username</dt><dd>{{ strtolower($user->username) }}</dd></div>
             <div><dt>Joined</dt><dd>{{ $user->joindate?->format('j M Y') ?? 'Unknown' }}</dd></div>
         </dl>
         <form method="post" action="{{ route('profile.update') }}" class="account-form" x-data="{ submitting: false }" @submit="submitting = true">
             @csrf
             @method('patch')
             <div class="account-field">
-                <x-input-label for="account-email" value="Login email" />
-                <x-text-input id="account-email" name="email" type="email" :value="old('email', strtolower($user->email))" required maxlength="32" autocomplete="username" />
+                <x-input-label for="account-email" value="Email" />
+                <x-text-input id="account-email" name="email" type="email" :value="old('email', strtolower($user->email))" required maxlength="255" autocomplete="email" />
                 <x-input-error :messages="$errors->updateProfile->get('email')" />
             </div>
             <div class="account-field">

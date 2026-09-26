@@ -42,7 +42,7 @@ class ProfileController extends Controller
     {
         $account = $request->user();
         $email = $request->validated('email');
-        if ($email === $account->email && $email === $account->username) {
+        if ($email === $account->email) {
             return back()->with('status', 'profile-updated');
         }
         $account->profile()->updateOrCreate([], ['pending_email' => $email]);

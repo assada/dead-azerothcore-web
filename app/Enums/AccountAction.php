@@ -20,7 +20,7 @@ enum AccountAction: string
     public function label(): string
     {
         return match ($this) {
-            self::Email => 'Login email changed',
+            self::Email => 'Email changed',
             self::Deactivate => 'Account deactivated',
             self::Restore => 'Account restored',
             self::Password => 'Password changed',

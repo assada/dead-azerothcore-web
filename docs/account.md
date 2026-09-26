@@ -1,13 +1,13 @@
 # My Account
 
-Laravel authenticates against `acore_auth.account` using the existing SRP6 verifier. Registration creates that same account, with email as `username`. Password changes and resets update its SRP6 credentials. No game authentication code or protocol changes are required.
+Laravel authenticates against `acore_auth.account` using the existing SRP6 verifier. Players choose a username for the website and game. Usernames contain up to 17 ASCII letters or digits and are case-insensitive. Email is stored separately for verification and password recovery, with a limit of 255 characters. Password changes and resets update the account's SRP6 credentials.
 
 `account_profiles` stores website metadata: email verification, pending email changes, remembered login tokens, and deactivation state. It has no separate password or identity. Laravel sessions and `account_operations` also use the auth connection.
 
 ## Account changes
 
 - Registration sends Laravel's signed email verification link. Password reset and remembered login remain available.
-- A login email change requires the current password, a signed link sent to the new address, and the current password again on confirmation. The account ID and characters stay the same. Previous password reset links are invalidated.
+- An email change requires the current password, a signed link sent to the new address, and the current password again on confirmation. It preserves the username, password, account ID, and characters. Previous password reset links are invalidated.
 - Password changes invalidate other website sessions when they next make a request. Ending other sessions also revokes remembered login tokens.
 - Deactivation requires confirmation, the current password, and logging out of the game first. It creates a permanent native account ban, ends website sessions, and preserves the account and characters.
 - An administrator can restore access with `php artisan account:restore ACCOUNT_ID`. This removes only the ban created for that deactivation. Other bans remain active.
